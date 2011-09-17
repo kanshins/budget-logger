@@ -1,0 +1,1 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><%@ attribute name="items" required="true" type="java.util.List"%><c:choose><c:when test="${null != items}"><c:forEach var="value" items="${items}" varStatus="status"><c:if test="${status.index > 0}">,</c:if>${value}</c:forEach></c:when></c:choose>

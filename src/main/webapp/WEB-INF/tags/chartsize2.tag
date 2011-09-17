@@ -1,0 +1,1 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><%@ attribute name="period" required="false" type="java.lang.Integer"%><c:choose><c:when test="${null != period}">${(period * 50) + 40}</c:when></c:choose>

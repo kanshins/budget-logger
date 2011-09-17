@@ -1,0 +1,1002 @@
+
+div.errorDiv {
+    background: rgb(238, 238, 238) none repeat scroll 0%; display: block; color: rgb(153, 51, 0); font-size: small;
+}
+
+td.footer {
+    text-align: center;
+}
+
+td.border {
+	border: 1px #bab8b1 dashed;
+}
+
+table.bill {
+	width: 400px;	
+}
+
+table.bill th.label {
+	width: 100px;	
+}
+
+table.bill th.value {
+	width: 300px;	
+}
+
+table.bill td.label {
+	width: 100px;	
+}
+
+table.bill td.value {
+	width: 300px;	
+}
+
+table.bill input.sum {
+	width: 100px;	
+}
+
+table.bill input.desc {
+	width: 277px;	
+}
+
+table.settings {
+	width: 100%;	
+}
+
+table.settings {
+	width: 100%;	
+}
+
+table.nameSettings {
+	/*width: 100%;*/	
+}
+
+table.search_results_table 
+{
+	width: 100%;
+}
+span.caption
+{
+	color: black;
+}
+
+span.messageSpan
+{
+	color: #000077;
+}
+
+span.errorSpan
+{
+	color: #ff0000;
+}
+
+span.orange_text
+{
+	font-weight: bold;
+	color: #D57D2A;
+	font-size: 14pt;
+}
+
+table.bigBorderedTable{
+	border-color: #bab8b1;
+	border-style: dashed;
+	border-width: 1px;
+	padding: 5px;
+	overflow: hidden;
+	width: 100%;
+}
+table.bigBorderedTable td 
+{
+	vertical-align:top;
+}
+table.TopNavMenuBorderedTable{
+	border-color: #bab8b1;
+	border-style: dashed;
+	border-width: 1px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	width: 100%;
+}
+
+table.WelcomeLine td
+{
+	padding-right: 1em;
+}
+table.NarrativeBorderedTable{
+	border-color: #bab8b1;
+	border-style: dashed;
+	border-width: 1px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: white;
+    color: black;
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size: 90%;
+}
+
+label,textarea {
+	display: block;
+	float: left;
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+td.content {
+    width: 100%;
+    vertical-align: top;
+    padding: 1em 0.5em 0.3em 0.5em;
+}
+
+a, a:visited {
+  color: #883311;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #cc3300;
+  text-decoration: underline;
+}
+
+a.inactive, a.inactive:visited {
+  color: #555555;
+  text-decoration: none;
+}
+
+a.inactive:hover {
+  color: #555555;
+  text-decoration: underline;
+}
+
+p.comments_count
+{
+	font-weight: bold;
+}
+
+/* =========== Other ======== */
+h1, h2 {
+  line-height: 110%;
+  margin-left: 5px;
+  margin-top: -2px;
+  margin-bottom: -2px;
+}
+
+h1 {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: large;
+}
+
+h3 {
+  font-size: small;
+}
+
+input.editbox 
+{
+	border-color: #313131;
+	border-width: 1px;
+	border-style: solid;
+	width: 150px;
+}
+
+.textarea {border-color: #313131;
+border-left-width: 1px;
+border-top-width: 1px;
+border-right-width: 1px;
+border-bottom-width: 1px;
+border-style: solid;
+width: 150px;
+height: 170px;
+}
+.stextarea {border-color: #313131;
+border-left-width: 1px;
+border-top-width: 1px;
+border-right-width: 1px;
+border-bottom-width: 1px;
+border-style: solid;
+}
+div.solidBorderedContainer {
+	border-color: #bab8b1;
+	border-style: solid;
+	border-width: 1px;
+	padding: 5px;
+	overflow: hidden;
+	width: 635px;
+}
+input.smallButton {background:#eeeeee; width:75px; height:25px; margin-top: 10px; margin-left: 5px; margin-bottom: 10px}
+
+input.bigButton {background:#eeeeee; width:110px; height:25px; margin-top: 10px; margin-left: 5px; margin-bottom: 10px}
+
+.errorText{
+color:#993300;
+}
+
+label {
+	text-align: right;
+	width: 150px;
+	padding-right: 20px;
+}
+
+br {
+	clear: left;
+}
+
+div.baseBorderedContainer {
+	border-color: #bab8b1;
+	border-style: dashed;
+	border-width: 1px;
+	padding: 5px;
+	overflow: hidden;
+}
+div.borderedContainer {
+	border-color: #bab8b1;
+	border-style: dashed;
+	border-width: 1px;
+	padding: 5px;
+	overflow: hidden;
+	width: 350px;
+}
+
+td.head-menu {
+    background-color: #dee2ff;
+    padding-right: 0.5em;
+    padding-bottom: 0.1em;
+    text-align: center;
+    vertical-align: bottom;
+}
+table.content td
+{
+	vertical-align: top;
+}
+table.borderedFooter{
+	border-color: #bab8b1;
+	border-style: dashed;
+	border-width: 1px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-top: 4px;
+}
+table.borderedFooter td
+{
+	text-align: center;
+}
+/* =========== Images ======== */
+img.accessIcon {
+	margin: 0;
+	height: 2.4em; 
+	border:none;
+}
+img.userpic {
+	border:none;
+}
+/* =========== Show folder link  ======== */
+table.folder
+{
+	border: solid #E7BF7A 2px;
+	border-collapse: collapse;
+	width: 136px;
+}
+table.folder th
+{
+	background: #E7BF7A;
+	text-align: center;
+	color: #ffffff;
+	font-weight: bold;
+}
+table.folder td
+{
+	padding: 0;
+	height: 113px;
+	vertical-align: bottom;
+	text-align: right;
+}
+table.folder a:hover
+{
+	text-decoration: none;
+}
+
+/* =========== Menu area ======== */
+table.user_menu
+{
+	border: solid #E7BF7A 2px;
+	border-collapse: collapse;
+	width: 250px;
+	text-align: left;
+}
+table.user_menu th
+{	
+	color: #fff;
+	background: #E7BF7A;
+	padding: 0.5em;
+}
+table.user_menu td
+{	
+	padding: 0.5em;
+}
+
+/* =========== General incoming ======== */
+table.general_incoming_caption
+{
+	background-color: #d57f48;
+	color: #ffffff;
+	font-size: large;
+	padding: 0.4em; 
+}
+div.general_incoming_caption 
+{
+	background-color: #d57f48;
+	padding: 0.15em; 
+}
+table.general_incoming
+{
+	background-color: #e8e8e8;
+	text-align: left;
+	font-size: small;
+	margin-top: 0.2em;
+}
+table.general_incoming td 
+{
+	padding: 0.5em;
+}
+table.general_incoming_inner
+{
+	background-color: #fff;
+	border-collapse: collapse;
+}
+table.general_incoming_inner td
+{
+	border-bottom: solid #d8d8d8 1px;
+}
+
+a.inboxComment, a.inboxComment:visited, a.inboxComment:hover
+{
+	color: #000;
+	font-weight: bold;
+	text-decoration: none;
+}
+a.inboxComment:visited
+{
+	color: #000;
+	font-weight: normal;
+	text-decoration: none;
+}
+span.greyFont
+{
+	color: #666;
+	font-weight: normal;
+}
+div.inboxReport
+{
+	background-color: #FFF8C6;
+	padding: 0.2em;
+	margin-left: 4em;
+	margin-right: 4em;
+}
+/* =========== General incoming end ======== */
+table.search_form
+{
+	border: solid #E7BF7A 2px;
+	border-collapse: collapse;
+	width: 250px;
+	text-align: left;
+}
+table.search_form th
+{	
+	color: #fff;
+	background: #E7BF7A;
+	padding: 0.5em;
+}
+table.search_form td
+{	
+	padding: 0.5em;
+}
+
+table.choosee_addressee_tabs
+{
+	width: 425px;
+	text-align: left;
+	font-weight: bold;
+}
+
+td.active_tab
+{
+	border: solid #dddddd 2px;
+	border-collapse: collapse;	
+	color: #000000;	
+	background: #eeeeee;
+	padding: 0.5em;		
+}
+
+td.inactive_tab
+{
+	border: solid #dddddd 2px;
+	border-collapse: collapse;
+	color: #000000;	
+	background: #E7BF7A;
+	padding: 0.5em;	
+}
+
+table.choose_addressee
+{
+	border: solid #E7BF7A 2px;
+	border-collapse: collapse;
+	width: 450px;
+	text-align: left;
+	background:#eeeeee
+}
+table.choose_addressee th
+{	
+	color: #fff;
+	background: #E7BF7A;
+	padding: 0.1em;
+}
+table.choose_addressee td
+{	
+	padding: 0.1em;
+}
+
+table.login_form
+{
+	border: solid #E7BF7A 2px;
+	border-collapse: collapse;
+	width: 250px;
+	text-align: left;
+}
+table.login_form th
+{	
+	color: #fff;
+	background: #E7BF7A;
+	padding: 0.1em;
+}
+table.login_form td
+{	
+	padding: 0.1em;
+}
+
+table.registration_form
+{
+	border: solid #E7BF7A 2px;
+	border-collapse: collapse;
+	width: 250px;
+	text-align: left;
+}
+table.registration_form tr td
+{
+	padding: 0.5em;
+}
+
+table.signupForm
+{
+	margin-left: 4em;
+	margin-top: 2em;
+	margin-right: 2em;
+}
+table.signupForm h2
+{
+	margin-top: 1em;
+}
+table.signupForm td
+{
+	vertical-align: top;
+	padding: 0.1em 1em;
+	font-size: small;
+}
+table.signupForm tfoot td
+{
+	text-align: right;
+	padding-top: 2em;
+	padding-right: 5em;
+}
+table.user_profile
+{
+	width: 350px;
+	text-align: left;
+}
+
+table.search_results
+{
+	border: dashed #bab8b1 1px;
+	border-collapse: collapse;
+	width: 100%;
+	text-align: left;
+}
+table.search_results th
+{	
+	color: #000000;
+	background: #E7BF7A;
+	padding: 0.1em;
+	text-align:center;	
+}
+table.search_results td
+{	
+	padding: 0.1em;
+}
+table.search_results td.date
+{	
+	width: 100px;
+	text-align: right;
+}
+table.search_results td.date_header
+{	
+	width: 90px;
+}
+table.search_results td.amount
+{	
+	width: 200px;
+	text-align: right;
+}
+table.search_results td.category
+{	
+	width: 150px; 
+	padding-left: 20px; 
+	text-align: left;
+}
+
+table.search_results td.desc
+{	
+	text-align: left;
+}
+table.search_results td.action
+{	
+	width: 100px;
+	text-align: center;
+}
+
+table.friend_profile
+{
+	width: 350px;
+	text-align: left;
+}
+
+table.friends_list
+{
+	border: dashed #E7BF7A 1px;
+	border-collapse: collapse;
+	width: 100%;
+	text-align: left;
+}
+table.friends_list th
+{	
+	text-align:center;
+	color: #000000;
+	background: #E7BF7A;
+	padding: 0.1em;
+}
+table.friends_list td
+{	
+	padding: 0.1em;
+}
+
+table.comment_view
+{
+	width: 100%;
+	text-align: left;
+}
+
+table.comments_list
+{
+	border: dashed #E7BF7A 1px;
+	border-collapse: collapse;
+	width: 100%;
+	text-align: left;
+}
+table.comments_list th
+{	
+	color: #000000;
+	background: #E7BF7A;
+	padding: 0.1em;
+	text-align:center;	
+}
+table.comments_list td
+{	
+	padding: 0.1em;
+}
+
+p.comment_title
+{
+	font-weight: bold;
+}
+
+table.folder_view
+{
+	border: dashed #E7BF7A 1px;
+	border-collapse: collapse;
+	width: 100%;
+	text-align: left;
+}
+table.folder_view th
+{	
+	background: #E7BF7A;
+	color: #fff;
+	padding: 0.1em;
+}
+table.folder_view td
+{	
+	padding: 0.1em;
+}
+
+input.register
+{
+	border-color: #313131;
+	border-width: 1px;
+	border-style: solid;
+	width: 220px;
+}
+
+input.register-date
+{
+	border-color: #313131;
+	border-width: 1px;
+	border-style: solid;
+	width: 200px;
+}
+
+select.register
+{
+	border-color: #313131;
+	border-width: 1px;
+	border-style: solid;	
+	width: 225px;
+}
+
+input.search
+{
+	border-color: #313131;
+	border-width: 1px;
+	border-style: solid;
+	width: 200px;
+}
+
+select.folderSelect
+{
+	width: 202px;
+}
+
+input.title
+{
+	width: 200px;
+}
+
+input.ads
+{
+	width: 250px;
+}
+
+select.ads
+{
+	width: 250px;
+}
+
+input.mailing
+{
+	width: 270px;
+}
+
+input.mailing-date
+{
+	width: 250px;
+}
+
+select.mailing
+{
+	width: 274px;
+}
+
+input.password
+{
+	width: 200px;
+}
+
+textarea.message
+{
+	width: 200px;
+}
+
+select.search
+{
+	border-color: #313131;
+	border-width: 1px;
+	border-style: solid;	
+	width: 202px;
+}
+
+table.account_header
+{
+	border: dashed #bab8b1 1px;
+	padding: 0.5em  0.5em;
+	margin: 12px 10px 12px 20px;
+	width: 244px;
+}
+table.account_info
+{
+	border: dashed #bab8b1 1px;
+	padding: 0.5em  0.5em;
+	margin: 12px 10px 12px 20px;
+	width: 244px;
+}
+table.account_info tfoot
+{
+	text-align:right;	
+}
+table.account_friends
+{
+	border: dashed #bab8b1 1px;
+	padding: 0.5em  0.5em;
+	margin: 12px 10px 12px 20px;
+	width: 244px;
+}
+table.account_friends tfoot
+{
+	text-align:right;	
+}
+
+/* =========== Folder list ======== */
+table.folderList td
+{
+	padding: 0.5em 0.5em;
+}
+
+/* =========== User account : show folders ======== */
+table.showFolders
+{
+	margin: 5px 5px 5px 5px;
+}
+table.showFolders td
+{
+	padding: 3px;
+}
+table.showFolders tfoot td
+{
+	text-align: right;
+	padding: 0.5em 0.7em;
+}
+/* =========== Adverts ======== */
+div.right_advert
+{
+	border: dashed #bab8b1 1px;
+	text-align: center;
+	width: 234px;
+	height:600px;
+}
+/* =========== Form from User account page ======== */
+table.mySendCommentForm
+{
+	margin: 4px 20px 4px 10px;
+	text-align: left;
+}
+input.mySend
+{
+	border-color: #313131;
+	border-width: 1px;
+	border-style: solid;
+	width: 200px;
+}
+
+select.mySend
+{
+	border-color: #313131;
+	border-width: 1px;
+	border-style: solid;	
+	width: 202px;
+}
+textarea.mySend
+{
+	border-color: #313131;
+	border-width: 1px;
+	border-style: solid;
+	height: 150px; 
+	overflow: auto;
+	width: 99%;
+}
+
+
+/* =========== Form from Personal page ======== */
+table.sendCommentForm
+{
+	border: solid #E7BF7A 2px;
+	border-collapse: collapse;
+	width: 300px;
+	text-align: center;
+}
+
+table.sendCommentForm th
+{	
+	color: #fff;
+	background: #E7BF7A;
+	padding: 0.5em;
+}
+table.sendCommentForm td
+{
+	padding: 0.1em 0.5em;
+}
+table.sendCommentForm tfoot td
+{
+	padding: 1em 3em;
+	text-align: right;
+}
+input.sendCommentForm
+{
+	width: 100%;
+}
+
+textarea.narrow_comment
+{
+	width: 95%;
+	height: 150px; 
+	overflow: auto;
+}
+
+textarea.ads
+{
+	width: 100%;
+	height: 150px; 
+	overflow: auto;
+}
+
+textarea.comment
+{
+	width: 95%;
+	height: 150px; 
+	overflow: auto;
+}
+textarea.terms
+{
+	width: 100%; 
+}
+div.successDiv
+{
+	width: 100%;
+	color: #883311;
+	padding: 0.2em;
+	text-align: center; 	
+}
+
+table.errorPage 
+{
+	margin-left: 4em;
+	margin-top: 2em;
+}
+table.errorPage td
+{
+	vertical-align: top;
+	padding: 0.1em 1em;
+	font-size: small;
+}
+table.errorPage tfoot td
+{
+	padding-top: 2em;
+}
+
+ul.orange-separated
+{
+	background-color: #E7BF7A;
+	padding: 0;
+    margin-left: 1em;
+}
+ul.orange-separated li
+{
+	background-color: #ffffff;
+    margin: 1px 0 0 0;
+    padding: 0.5em;
+    list-style-type: none;
+}
+span.showCommentsCaption
+{
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+}
+table.showComments
+{
+	margin: 12px 20px 12px 10px;
+	width: 448px;
+	text-align: left;
+}
+table.showComments td
+{
+	padding: 0.1em;
+}
+td.orange-line
+{
+	background-color: #E7BF7A;
+	padding: 0;
+}
+
+td.blue-line
+{
+	background-color: #dee2ff;
+	padding: 0;
+}
+
+div.orange-line 
+{
+	background-color: #ffffff;
+    margin: 2px 0 0 0;
+}
+div.TermsOfService
+{
+	padding-left: 4em;
+	padding-right: 4em;
+}
+div.PrivacyPolicy
+{
+	padding-left: 4em;
+	padding-right: 4em;
+}
+
+table.profile
+{
+	margin-left: 4em;
+	margin-top: 2em;
+	margin-right: 2em;
+}
+table.profile h2
+{
+	margin-top: 1em;
+}
+table.profile td
+{
+	vertical-align: top;
+	padding: 0.1em 1em;
+	font-size: small;
+}
+table.profile tfoot td
+{
+	text-align: right;
+	padding-top: 2em;
+}
+input.profile
+{
+	width: 220px;
+}
+select.profile
+{
+	width: 225px;
+}
+input.profileButton
+{
+	width: 100px;
+	margin-right: 3em;
+}
+table.password
+{
+	margin-left: 4em;
+	margin-top: 2em;
+	margin-right: 2em;
+}
+table.password h2
+{
+	margin-top: 1em;
+}
+table.password td
+{
+	vertical-align: top;
+	padding: 0.1em 1em;
+	font-size: small;
+}
+table.password tfoot td
+{
+	text-align: right;
+	padding-top: 2em;
+}
+input.password
+{
+	width: 220px;
+}
+input.passwordButton
+{
+	width: 100px;
+	margin-right: 3em;
+}
