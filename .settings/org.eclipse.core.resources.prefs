@@ -1,5 +1,4 @@
-#Tue Feb 22 23:26:05 CET 2011
 eclipse.preferences.version=1
-encoding//src/main/webapp/WEB-INF/messages/messages.properties=UTF-8
-encoding//src/main/webapp/WEB-INF/tags/categories.tag=UTF-8
-encoding//src/main/webapp/WEB-INF/tags/datefield.tag=UTF-8
+encoding//src/main/java=UTF-8
+encoding//src/main/resources/messages.properties=UTF-8
+encoding/<project>=UTF-8

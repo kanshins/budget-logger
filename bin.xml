@@ -11,24 +11,9 @@
 			<outputDirectory>data</outputDirectory>
 		</fileSet>
 		<fileSet>
-			<directory>mongo</directory>
-			<useDefaultExcludes>true</useDefaultExcludes>
-			<outputDirectory>mongo</outputDirectory>
-		</fileSet>
-		<fileSet>
-			<directory>prism</directory>
-			<useDefaultExcludes>true</useDefaultExcludes>
-			<outputDirectory>prism</outputDirectory>
-		</fileSet>
-		<fileSet>
 			<directory>scripts</directory>
 			<useDefaultExcludes>true</useDefaultExcludes>
 			<outputDirectory>/</outputDirectory>
-		</fileSet>
-		<fileSet>
-			<directory>src/main/webapp</directory>
-			<useDefaultExcludes>true</useDefaultExcludes>
-			<outputDirectory>webapp</outputDirectory>
 		</fileSet>
 	</fileSets> 
 	<dependencySets>

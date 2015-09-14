@@ -9,8 +9,9 @@ import java.util.Date;
 import org.springframework.context.support.MessageSourceAccessor;
 
 /**
- * @author kanshin
- *
+ * 
+ * @author <sergey.kanshin@gmail.com>
+ * @date 14 сент. 2015 г.
  */
 public class DateHelper {
 
