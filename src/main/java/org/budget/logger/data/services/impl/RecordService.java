@@ -3,8 +3,8 @@
  */
 package org.budget.logger.data.services.impl;
 
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import org.budget.logger.data.dao.ICategoryDao;
 import org.budget.logger.data.dao.IRecordDao;
@@ -51,7 +51,7 @@ public class RecordService implements IRecordService {
     }
 
     @Override
-    public Collection<Record> getAllRecords() {
+    public List<Record> getAllRecords() {
         return recordDao.readAll();
     }
 
@@ -93,12 +93,12 @@ public class RecordService implements IRecordService {
     }
 
     @Override
-    public Collection<Category> getCategories() {
+    public List<Category> getCategories() {
         return categoryDao.readAll();
     }
 
     @Override
-    public Collection<Record> getRecords(Type type, Date from, Date to, Category name) {
+    public List<Record> getRecords(Type type, Date from, Date to, Category name) {
         return recordDao.findByParams(type, from, to, name);
     }
 

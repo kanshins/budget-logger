@@ -5,6 +5,7 @@ package org.budget.logger.data.dao;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import org.budget.logger.data.model.Category;
 import org.budget.logger.data.model.Record;
@@ -23,11 +24,11 @@ public interface IRecordDao {
 
     Record read(Long id);
 
-    Collection<Record> readAll();
+    List<Record> readAll();
 
     void delete(Long id);
 
-    Collection<Record> findByParams(Type type, Date from, Date to, Category name);
+    List<Record> findByParams(Type type, Date from, Date to, Category name);
 
     void updateCategory(String oldCategory, String newCategory);
 

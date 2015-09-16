@@ -3,8 +3,8 @@
  */
 package org.budget.logger.data.services;
 
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import org.budget.logger.data.model.Category;
 import org.budget.logger.data.model.Record;
@@ -16,9 +16,9 @@ import org.budget.logger.data.model.Type;
  */
 public interface IRecordService {
 
-    Collection<Record> getAllRecords();
+    List<Record> getAllRecords();
 
-    Collection<Record> getRecords(Type type, Date from, Date to, Category cat);
+    List<Record> getRecords(Type type, Date from, Date to, Category cat);
 
     Record createRecord(String category, String desc, Type type, Date date, Double amount);
 
@@ -30,7 +30,7 @@ public interface IRecordService {
 
     Category updateCaterory(Category category);
 
-    Collection<Category> getCategories();
+    List<Category> getCategories();
 
     void deleteRecord(Long id);
 

@@ -6,6 +6,11 @@ package org.budget.logger;
 import java.awt.SplashScreen;
 
 import org.apache.log4j.Logger;
+import org.budget.logger.data.services.IRecordService;
+import org.budget.logger.ui.AppEvents;
+import org.budget.logger.ui.controllers.MainController;
+import org.budget.logger.ui.controllers.RecordsController;
+import org.budget.logger.ui.mvc.Dispatcher;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -29,12 +34,19 @@ public class BudgetLogger {
             logger.fatal("SplashScreen.getSplashScreen() returned null");
             return;
         }
-        
+
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 
-        Thread.sleep(3000);
+        IRecordService recordService = (IRecordService) context.getBean("recordService");
 
+        Dispatcher.get().addController(new MainController(context));
+        Dispatcher.get().addController(new RecordsController(recordService));
+        Dispatcher.forwardEvent(AppEvents.Init);
         splash.close();
-
+        Dispatcher.forwardEvent(AppEvents.StartApp);
+        logger.info("Application started");
+        
+        Dispatcher.forwardEvent(AppEvents.OpenRecordsTab);
+        
     }
 }

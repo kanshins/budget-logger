@@ -3,7 +3,7 @@
  */
 package org.budget.logger.data.dao;
 
-import java.util.Collection;
+import java.util.List;
 
 import org.budget.logger.data.model.Category;
 
@@ -20,7 +20,7 @@ public interface ICategoryDao {
 
     Category read(Long id);
 
-    Collection<Category> readAll();
+    List<Category> readAll();
 
     Category findByName(String name);
 

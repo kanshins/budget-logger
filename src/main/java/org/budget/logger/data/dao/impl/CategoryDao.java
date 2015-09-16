@@ -3,7 +3,6 @@
  */
 package org.budget.logger.data.dao.impl;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -51,7 +50,7 @@ public class CategoryDao extends NamedParameterJdbcDaoSupport implements ICatego
         JdbcTemplate t = getJdbcTemplate();
         String sql = "select id, name, def, report from categories where id=?";
         // logger.debug(sql);
-        Collection<Category> list = t.query(sql, new Object[] { id }, Category.ROW_MAPPER);
+        List<Category> list = t.query(sql, new Object[] { id }, Category.ROW_MAPPER);
         return list.size() > 0 ? list.iterator().next() : null;
 
     }
@@ -75,7 +74,7 @@ public class CategoryDao extends NamedParameterJdbcDaoSupport implements ICatego
     }
 
     @Override
-    public Collection<Category> readAll() {
+    public List<Category> readAll() {
         JdbcTemplate t = getJdbcTemplate();
         String sql = "select id, name, def, report from categories order by name asc";
         // logger.debug(sql);

@@ -3,3 +3,20 @@ create table records ( id bigint not null generated always as identity (start wi
 create table categories (id bigint not null generated always as identity (start with 1, increment by 1), name varchar(100) not null, def integer default 0, report integer default 1, unique (name));
 
 insert into categories (name, def, report) values ('Продукты', 1, 1);
+
+
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);

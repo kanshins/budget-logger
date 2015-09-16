@@ -18,9 +18,9 @@ public abstract class AppEvents {
 
     public static final EventType Exit = new EventType();
 
-    public static final EventType AppendLog = new EventType();
+    public static final EventType OpenRecordsTab = new EventType();
 
-    public static final EventType DoGetRequest = new EventType();
+    public static final EventType DoSearchRecords = new EventType();
 
     public static final EventType DoPostRequest = new EventType();
 

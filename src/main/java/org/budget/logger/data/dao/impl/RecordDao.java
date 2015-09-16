@@ -44,7 +44,7 @@ public class RecordDao extends NamedParameterJdbcDaoSupport implements IRecordDa
     }
 
     @Override
-    public Collection<Record> readAll() {
+    public List<Record> readAll() {
         JdbcTemplate t = getJdbcTemplate();
         String sql = "select id, category, type, description, create_date, amount from records order by create_date desc";
         // logger.debug(sql);
@@ -60,7 +60,7 @@ public class RecordDao extends NamedParameterJdbcDaoSupport implements IRecordDa
     }
 
     @Override
-    public Collection<Record> findByParams(Type type, Date from, Date to, Category category) {
+    public List<Record> findByParams(Type type, Date from, Date to, Category category) {
         JdbcTemplate t = getJdbcTemplate();
         String sql = "select id, category, type, description, create_date, amount from records";
         List<Object> params = new ArrayList<Object>();
@@ -74,7 +74,7 @@ public class RecordDao extends NamedParameterJdbcDaoSupport implements IRecordDa
             params.add(from);
         }
         if (null != to) {
-            sqlWhere += prefix(sqlWhere) + "create_date<?";
+            sqlWhere += prefix(sqlWhere) + "create_date<=?";
             params.add(to);
         }
         if (null != category) {
