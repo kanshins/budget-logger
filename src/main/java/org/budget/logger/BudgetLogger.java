@@ -9,10 +9,13 @@ import org.apache.log4j.Logger;
 import org.budget.logger.data.services.IRecordService;
 import org.budget.logger.ui.AppEvents;
 import org.budget.logger.ui.controllers.MainController;
+import org.budget.logger.ui.controllers.MainReportController;
 import org.budget.logger.ui.controllers.RecordsController;
 import org.budget.logger.ui.mvc.Dispatcher;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.AbstractMessageSource;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.MessageSourceAccessor;
 
 /**
  * 
@@ -37,10 +40,13 @@ public class BudgetLogger {
 
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 
+        AbstractMessageSource messageSource = (AbstractMessageSource) context.getBean("messageSource");
+        MessageSourceAccessor messageSourceAccessor = new MessageSourceAccessor(messageSource); 
         IRecordService recordService = (IRecordService) context.getBean("recordService");
 
         Dispatcher.get().addController(new MainController(context));
         Dispatcher.get().addController(new RecordsController(recordService));
+        Dispatcher.get().addController(new MainReportController(messageSourceAccessor, recordService));
         Dispatcher.forwardEvent(AppEvents.Init);
         splash.close();
         Dispatcher.forwardEvent(AppEvents.StartApp);

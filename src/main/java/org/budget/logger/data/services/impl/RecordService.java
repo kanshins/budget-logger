@@ -14,6 +14,8 @@ import org.budget.logger.data.model.Type;
 import org.budget.logger.data.services.IRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 
@@ -30,6 +32,7 @@ public class RecordService implements IRecordService {
     private ICategoryDao categoryDao;
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Record createRecord(String name, String desc, Type type, Date date, Double amount) {
         Record r = new Record();
         r.setCategory(name);
@@ -41,26 +44,37 @@ public class RecordService implements IRecordService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public Record createRecord(Record record) {
+        return recordDao.create(record);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Record updateRecord(Record record) {
         return recordDao.update(record);
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
     public Record getRecord(Long id) {
         return recordDao.read(id);
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
     public List<Record> getAllRecords() {
         return recordDao.readAll();
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void deleteRecord(Long id) {
         recordDao.delete(id);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Category createCategory(String name, Boolean isDefault, Boolean report) {
         if (isDefault) {
             categoryDao.setDefaultForAll(false);
@@ -73,16 +87,19 @@ public class RecordService implements IRecordService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
     public Category getCaterory(Long id) {
         return categoryDao.read(id);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void deleteCaterory(Long id) {
         categoryDao.delete(id);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Category updateCaterory(Category category) {
         Category old = categoryDao.read(category.getId());
         if (category.getDef()) {
@@ -93,16 +110,19 @@ public class RecordService implements IRecordService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
     public List<Category> getCategories() {
         return categoryDao.readAll();
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
     public List<Record> getRecords(Type type, Date from, Date to, Category name) {
         return recordDao.findByParams(type, from, to, name);
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
     public Category getCateroryByName(String name) {
         return categoryDao.findByName(name);
     }

@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
@@ -45,6 +46,10 @@ public class MainView extends View {
             mainFrame.setVisible(true);
             return;
         }
+        if (AppEvents.ShowError.equals(event.getType())) {
+            JOptionPane.showMessageDialog(mainFrame, event.getData(), "Ошибка", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
     }
 
     private void onInit() {
@@ -77,7 +82,20 @@ public class MainView extends View {
         tabs.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                if (0 ==tabs.getSelectedIndex()) {
+                switch (tabs.getSelectedIndex()) {
+                case 0: 
+                    Dispatcher.forwardEvent(AppEvents.OpenRecordsTab);
+                    break;
+                case 1: 
+                    Dispatcher.forwardEvent(AppEvents.OpenMainReportTab);
+                    break;
+                case 2: 
+                    Dispatcher.forwardEvent(AppEvents.OpenDetailsReportTab);
+                    break;
+                case 3: 
+                    Dispatcher.forwardEvent(AppEvents.OpenSettingsTab);
+                    break;
+                default:
                     Dispatcher.forwardEvent(AppEvents.OpenRecordsTab);
                 }
             }

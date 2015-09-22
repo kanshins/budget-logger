@@ -30,6 +30,9 @@ public class RecordsController extends Controller {
         registerEventTypes(AppEvents.Init);
         registerEventTypes(AppEvents.OpenRecordsTab);
         registerEventTypes(AppEvents.DoSearchRecords);
+        registerEventTypes(AppEvents.DoAddRecord);
+        registerEventTypes(AppEvents.DoDeleteRecord);
+        registerEventTypes(AppEvents.DoEditRecord);
     }
     
     @Override
@@ -55,6 +58,22 @@ public class RecordsController extends Controller {
             Date to = recordsTabView.getSearchDateTo();
             List<Record> list = recordService.getRecords(null, from, to, cat);
             recordsTabView.setData(list);
+            return;
+        }
+        if (AppEvents.DoAddRecord.equals(event.getType())) {
+            Record r = event.getData();
+            recordService.createRecord(r);
+            Dispatcher.forwardEvent(AppEvents.DoSearchRecords);
+            return;
+        }
+        if (AppEvents.DoDeleteRecord.equals(event.getType())) {
+            Record r = event.getData();
+            recordService.deleteRecord(r.getId());
+            recordsTabView.deleteFromStore(r);
+            return;
+        }
+        if (AppEvents.DoEditRecord.equals(event.getType())) {
+
             return;
         }
     }

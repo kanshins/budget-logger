@@ -22,6 +22,8 @@ public interface IRecordService {
 
     Record createRecord(String category, String desc, Type type, Date date, Double amount);
 
+    Record createRecord(Record record);
+
     Record updateRecord(Record record);
 
     Category getCateroryByName(String name);

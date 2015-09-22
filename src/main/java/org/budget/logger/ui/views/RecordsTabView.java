@@ -6,10 +6,13 @@ package org.budget.logger.ui.views;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,6 +21,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.swing.AbstractCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -26,11 +30,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
+import javax.xml.bind.ValidationException;
 
+import org.apache.log4j.Logger;
 import org.budget.logger.data.model.Category;
 import org.budget.logger.data.model.Record;
 import org.budget.logger.data.model.Type;
@@ -38,7 +47,6 @@ import org.budget.logger.helpers.DateHelper;
 import org.budget.logger.ui.AppEvents;
 import org.budget.logger.ui.mvc.AppEvent;
 import org.budget.logger.ui.mvc.Controller;
-import org.budget.logger.ui.mvc.Dispatcher;
 import org.budget.logger.ui.mvc.Registry;
 import org.budget.logger.ui.mvc.View;
 import org.jdesktop.swingx.JXDatePicker;
@@ -49,11 +57,18 @@ import org.jdesktop.swingx.JXDatePicker;
  */
 public class RecordsTabView extends View {
 
-    private JComboBox<CategoryComboValue> comboCatAdd;
+    private Logger logger = Logger.getLogger(getClass());
+    
+    private JComboBox<CategoryComboValue> addCat;
     private JComboBox<CategoryComboValue> comboCatSearch;
+    private JTable table;
     private RecordsTableModel tableModel;
     private JXDatePicker datePickerFrom;
     private JXDatePicker datePickerTo;
+    private JTextField addAmount;
+    private JXDatePicker addDate;
+    private JComboBox<TypeComboValue> addTypes;
+    private JTextField addDesc;
 
     public RecordsTabView(Controller controller) {
         super(controller);
@@ -83,39 +98,20 @@ public class RecordsTabView extends View {
 
     private JTable createTable() {
         tableModel = new RecordsTableModel();
-        JTable table = new JTable(tableModel);
-        table.getColumnModel().getColumn(2).setCellRenderer(new TableCellRenderer() {
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-                    int row, int column) {
-                Record r = tableModel.getRow(row);
-                int amount = r.getAmount().intValue();
-                JLabel label = null;
-                switch(r.getType()) {
-                case INCOME:
-                    label = new JLabel("" + amount);
-                    label.setForeground(new Color(0, 0, 170));
-                    return label;
-                case OUTCOME:
-                    label = new JLabel("-" + amount);
-                    label.setForeground(new Color(170, 0, 0));
-                    return label;
-                case STORING:
-                    label = new JLabel("" + amount);
-                    label.setForeground(new Color(0, 170, 0));
-                    return label;
-                }
-                return null;
-            }
-        });
-        table.getColumnModel().getColumn(5).setCellRenderer(new TableCellRenderer() {
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-                    int row, int column) {
-                return new JButton(ImageHelper.DELETE);
-            }
-        });
-        
+        table = new JTable(tableModel);
+        table.getColumnModel().getColumn(0).setPreferredWidth(50);
+        table.getColumnModel().getColumn(1).setPreferredWidth(50);
+        table.getColumnModel().getColumn(2).setPreferredWidth(50);
+        table.getColumnModel().getColumn(3).setPreferredWidth(50);
+        table.getColumnModel().getColumn(4).setPreferredWidth(200);
+        table.getColumnModel().getColumn(5).setWidth(10);
+        table.getColumnModel().getColumn(5).setPreferredWidth(10);
+        table.getColumnModel().getColumn(2).setCellRenderer(new AmountCellRenderer());
+        table.getColumnModel().getColumn(5).setCellRenderer(new ActionCell());
+        table.getColumnModel().getColumn(5).setCellEditor(new ActionCell());
+        table.setRowHeight(24);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
         return table;
     }
 
@@ -138,7 +134,7 @@ public class RecordsTabView extends View {
         searchBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Dispatcher.forwardEvent(AppEvents.DoSearchRecords);
+                fireEvent(AppEvents.DoSearchRecords);
             }
         });
         return searchPanel;
@@ -148,28 +144,71 @@ public class RecordsTabView extends View {
         JPanel addPanel = new JPanel();
         addPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
         addPanel.add(new JLabel("Дата:"));
-        JXDatePicker datePicker = new JXDatePicker(new Date());
-        addPanel.add(datePicker);
+        addDate = new JXDatePicker(new Date());
+        addPanel.add(addDate);
+
         TypeComboValue[] typeValues = { new TypeComboValue(Type.OUTCOME), new TypeComboValue(Type.INCOME),
                 new TypeComboValue(Type.STORING) };
-        JComboBox<TypeComboValue> typesCombo = new JComboBox<RecordsTabView.TypeComboValue>(typeValues);
-        addPanel.add(typesCombo);
-        comboCatAdd = new JComboBox<CategoryComboValue>();
-        addPanel.add(comboCatAdd);
+        addTypes = new JComboBox<RecordsTabView.TypeComboValue>(typeValues);
+        addPanel.add(addTypes);
+
         addPanel.add(new JLabel("Сумма:"));
-        JTextField sumField = new JTextField(5);
-        addPanel.add(sumField);
+        addAmount = new JTextField(5);
+        addPanel.add(addAmount);
+
+        addCat = new JComboBox<CategoryComboValue>();
+        addPanel.add(addCat);
 
         addPanel.add(new JLabel("Описание:"));
-        JTextField descField = new JTextField(15);
-        addPanel.add(descField);
+        addDesc = new JTextField(15);
+        addPanel.add(addDesc);
 
         JButton addBtn = new JButton("Добавить");
+        addBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Record r = getNewRecord();
+                    fireEvent(new AppEvent(AppEvents.DoAddRecord, r));
+                } catch (ValidationException ex) {
+                    logger.warn(ex.getMessage());
+                }
+            }
+        });
         addPanel.add(addBtn);
-
         return addPanel;
     }
 
+    private Record getNewRecord() throws ValidationException {
+        validateEmpty(addAmount);
+        validateEmpty(addDesc);
+        Record r = new Record();
+        try {
+            r.setAmount(Double.parseDouble(addAmount.getText()));
+        } catch (Exception e) {
+            throw new ValidationException("amount not valid");
+        }
+        r.setDesc(addDesc.getText());
+        TypeComboValue typeValue = (TypeComboValue) addTypes.getSelectedItem();
+        r.setType(typeValue.getValue());
+        CategoryComboValue catValue = (CategoryComboValue) addCat.getSelectedItem();
+        r.setCategory(catValue.getValue().getName());
+        r.setDate(addDate.getDate());
+        addAmount.setText("");
+        addDesc.setText("");
+        return r;
+    }
+    
+    private void validateEmpty(JTextField field) throws ValidationException {
+        String value = field.getText();
+        if (null == value || "".equals(value.trim())) {
+            field.setBackground(new Color(255, 200, 200));
+            throw new ValidationException("field is empty");
+        } else {
+            field.setBackground(new Color(255, 255, 255));
+        }
+    }
+    
     public void setCategories(List<Category> categories) {
         List<CategoryComboValue> list = new ArrayList<CategoryComboValue>();
         CategoryComboValue def = null;
@@ -181,15 +220,20 @@ public class RecordsTabView extends View {
             }
         }
         comboCatSearch.setModel(new DefaultComboBoxModel<CategoryComboValue>(list.toArray(new CategoryComboValue[0])));
-        comboCatAdd.setModel(new DefaultComboBoxModel<CategoryComboValue>(list.toArray(new CategoryComboValue[0])));
+        addCat.setModel(new DefaultComboBoxModel<CategoryComboValue>(list.toArray(new CategoryComboValue[0])));
         if (null != def) {
             comboCatSearch.setSelectedItem(def);
-            comboCatAdd.setSelectedItem(def);
+            addCat.setSelectedItem(def);
         }
     }
 
     public void setData(List<Record> data) {
         tableModel.setData(data);
+    }
+    
+    public void deleteFromStore(Record r) {
+        tableModel.deleteRow(r);
+        table.updateUI();
     }
 
     public Category getSearchCategory() {
@@ -214,10 +258,6 @@ public class RecordsTabView extends View {
             this.value = value;
         }
 
-        public String getLabel() {
-            return label;
-        }
-
         public Type getValue() {
             return value;
         }
@@ -235,10 +275,6 @@ public class RecordsTabView extends View {
         public CategoryComboValue(Category value) {
             this.label = value.getName();
             this.value = value;
-        }
-
-        public String getLabel() {
-            return label;
         }
 
         public Category getValue() {
@@ -261,6 +297,14 @@ public class RecordsTabView extends View {
 
         public void setData(List<Record> data) {
             this.data = data;
+            for (TableModelListener l : listeners) {
+                TableModelEvent e = new TableModelEvent(this);
+                l.tableChanged(e);
+            }
+        }
+        
+        public void deleteRow(Record r) {
+            this.data.remove(r);
             for (TableModelListener l : listeners) {
                 TableModelEvent e = new TableModelEvent(this);
                 l.tableChanged(e);
@@ -295,7 +339,7 @@ public class RecordsTabView extends View {
             case 4:
                 return "Описание";
             case 5:
-                return "Действие";
+                return "";
             }
             return "";
         }
@@ -332,7 +376,7 @@ public class RecordsTabView extends View {
 
         @Override
         public boolean isCellEditable(int rowIndex, int columnIndex) {
-            return false;
+            return columnIndex == 5;
         }
 
         @Override
@@ -345,6 +389,95 @@ public class RecordsTabView extends View {
             listeners.remove(l);
         }
 
+    }
+
+    private class AmountCellRenderer extends DefaultTableCellRenderer {
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+                boolean hasFocus, int row, int column) {
+            JLabel label = (JLabel) super
+                    .getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            Record r = tableModel.getRow(row);
+            int amount = r.getAmount().intValue();
+            label.setText("" + amount);
+            switch (r.getType()) {
+            case INCOME:
+                label.setForeground(new Color(0, 0, 170));
+                return label;
+            case OUTCOME:
+                label.setForeground(new Color(170, 0, 0));
+                return label;
+            case STORING:
+                label.setForeground(new Color(0, 170, 0));
+                return label;
+            }
+            return label;
+        }
+    }
+
+    private class ActionCell extends AbstractCellEditor implements TableCellEditor, TableCellRenderer {
+        private static final long serialVersionUID = 1L;
+        private JPanel panel;
+        private JLabel labelEdit;
+        private JLabel labelDelete;
+        private Record record;
+
+        public ActionCell() {
+            panel = new JPanel();
+            labelEdit = new JLabel();
+            labelEdit.setIcon(ImageHelper.EDIT);
+            labelEdit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            panel.add(labelEdit);
+            labelEdit.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    fireEvent(new AppEvent(AppEvents.DoEditRecord, record));
+                }
+            });
+            labelDelete = new JLabel();
+            labelDelete.setIcon(ImageHelper.DELETE);
+            labelDelete.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+            panel.add(labelDelete);
+            labelDelete.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    fireEvent(new AppEvent(AppEvents.DoDeleteRecord, record));
+                }
+            });
+        }
+
+        private void updateData(Record record, boolean isSelected, JTable table, int row) {
+            this.record = record;
+            if (isSelected) {
+                panel.setBackground(table.getSelectionBackground());
+            } else {
+                Color alternateColor = new Color(242, 242, 242);
+                if (null != alternateColor && row % 2 != 0) {
+                    panel.setBackground(alternateColor);
+                } else {
+                    panel.setBackground(Color.WHITE);
+                }
+            }
+        }
+
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            Record record = tableModel.getRow(row);
+            updateData(record, true, table, row);
+            return panel;
+        }
+
+        public Object getCellEditorValue() {
+            return null;
+        }
+
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+                boolean hasFocus, int row, int column) {
+            Record record = tableModel.getRow(row);
+            updateData(record, isSelected, table, row);
+            return panel;
+        }
     }
 
     private static String getTypeString(Type type) {

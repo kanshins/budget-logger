@@ -17,7 +17,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class MainController extends Controller {
 
     private ApplicationContext context;
-    
+
     private MainView mainView;
 
     public MainController(ApplicationContext context) {
@@ -25,6 +25,7 @@ public class MainController extends Controller {
         registerEventTypes(AppEvents.Init);
         registerEventTypes(AppEvents.StartApp);
         registerEventTypes(AppEvents.Exit);
+        registerEventTypes(AppEvents.ShowError);
     }
 
     @Override
@@ -43,8 +44,12 @@ public class MainController extends Controller {
             return;
         }
         if (AppEvents.Exit.equals(event.getType())) {
-            ((ConfigurableApplicationContext)context).close();
+            ((ConfigurableApplicationContext) context).close();
             System.exit(0);
+            return;
+        }
+        if (AppEvents.ShowError.equals(event.getType())) {
+            forwardToView(mainView, event);
             return;
         }
     }

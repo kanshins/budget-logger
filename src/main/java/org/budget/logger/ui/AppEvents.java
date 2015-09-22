@@ -20,13 +20,21 @@ public abstract class AppEvents {
 
     public static final EventType OpenRecordsTab = new EventType();
 
+    public static final EventType OpenMainReportTab = new EventType();
+
+    public static final EventType OpenDetailsReportTab = new EventType();
+
+    public static final EventType OpenSettingsTab = new EventType();
+
     public static final EventType DoSearchRecords = new EventType();
 
-    public static final EventType DoPostRequest = new EventType();
+    public static final EventType DoAddRecord = new EventType();
 
-    public static final EventType ShowContent = new EventType();
+    public static final EventType DoDeleteRecord = new EventType();
 
-    public static final EventType ShowSrc = new EventType();
+    public static final EventType DoEditRecord = new EventType();
 
-    public static final EventType UpdateLoadProgress = new EventType();
+    public static final EventType ViewReport = new EventType();
+
+    public static final EventType ShowError = new EventType();
 }
