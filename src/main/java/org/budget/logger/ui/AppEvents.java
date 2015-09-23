@@ -21,7 +21,9 @@ public abstract class AppEvents {
     public static final EventType OpenRecordsTab = new EventType();
 
     public static final EventType OpenMainReportTab = new EventType();
-
+    
+    public static final EventType OpenCategoryReportTab = new EventType();
+    
     public static final EventType OpenDetailsReportTab = new EventType();
 
     public static final EventType OpenSettingsTab = new EventType();

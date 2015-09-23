@@ -8,6 +8,8 @@ import java.awt.SplashScreen;
 import org.apache.log4j.Logger;
 import org.budget.logger.data.services.IRecordService;
 import org.budget.logger.ui.AppEvents;
+import org.budget.logger.ui.controllers.CategoryReportController;
+import org.budget.logger.ui.controllers.DetailsReportController;
 import org.budget.logger.ui.controllers.MainController;
 import org.budget.logger.ui.controllers.MainReportController;
 import org.budget.logger.ui.controllers.RecordsController;
@@ -47,6 +49,8 @@ public class BudgetLogger {
         Dispatcher.get().addController(new MainController(context));
         Dispatcher.get().addController(new RecordsController(recordService));
         Dispatcher.get().addController(new MainReportController(messageSourceAccessor, recordService));
+        Dispatcher.get().addController(new CategoryReportController(messageSourceAccessor, recordService));
+        Dispatcher.get().addController(new DetailsReportController(messageSourceAccessor, recordService));
         Dispatcher.forwardEvent(AppEvents.Init);
         splash.close();
         Dispatcher.forwardEvent(AppEvents.StartApp);

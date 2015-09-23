@@ -9,32 +9,38 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.util.Date;
+import java.util.Map;
 
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import org.budget.logger.data.model.Category;
+import org.budget.logger.helpers.DateHelper;
 import org.budget.logger.ui.AppEvents;
 import org.budget.logger.ui.mvc.AppEvent;
 import org.budget.logger.ui.mvc.Controller;
 import org.budget.logger.ui.mvc.Registry;
 import org.budget.logger.ui.mvc.View;
+import org.jdesktop.swingx.JXDatePicker;
 
 /**
  * @author <sergey.kanshin@gmail.com>
- * @date 22 сент. 2015 г.
+ * @date 23 сент. 2015 г.
  */
-public class MainReportView extends View {
+public class DetailsReportView extends View {
 
-    private JComboBox<Integer> periodCombo;
+    private JXDatePicker datePickerFrom;
+    private JXDatePicker datePickerTo;
     private JPanel chartPanel;
     private JScrollPane chartScroll;
+    private JPanel wrapper;
 
-    public MainReportView(Controller controller) {
+    public DetailsReportView(Controller controller) {
         super(controller);
     }
 
@@ -47,27 +53,25 @@ public class MainReportView extends View {
     }
 
     private void onInit() {
-        JPanel main = Registry.get("reportMainPanel");
+        JPanel main = Registry.get("reportDetailPanel");
         main.setLayout(new BorderLayout());
 
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new GridLayout(1, 1));
         topPanel.add(createPeriodPanel());
         main.add(topPanel, BorderLayout.NORTH);
-
-        chartScroll = new JScrollPane(createChart());
-        main.add(chartScroll, BorderLayout.CENTER);
     }
 
     private JPanel createPeriodPanel() {
         JPanel periodPanel = new JPanel();
         periodPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        periodPanel.add(new JLabel("Период:"));
-        periodCombo = new JComboBox<Integer>();
-        Integer[] items = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
-        periodCombo.setModel(new DefaultComboBoxModel<Integer>(items));
-        periodCombo.setSelectedIndex(5);
-        periodPanel.add(periodCombo);
+
+        periodPanel.add(new JLabel("С:"));
+        datePickerFrom = new JXDatePicker(DateHelper.getPreviousMonth());
+        periodPanel.add(datePickerFrom);
+        periodPanel.add(new JLabel("По:"));
+        datePickerTo = new JXDatePicker(new Date());
+        periodPanel.add(datePickerTo);
 
         JButton actionBtn = new JButton("Показать");
         periodPanel.add(actionBtn);
@@ -80,22 +84,40 @@ public class MainReportView extends View {
         return periodPanel;
     }
 
-    public Integer getPeriod() {
-        return (Integer) periodCombo.getSelectedItem();
+    public Date getFromDate() {
+        return datePickerFrom.getDate();
+    }
+
+    public Date getToDate() {
+        return datePickerTo.getDate();
     }
 
     private JPanel createChart() {
         chartPanel = new JPanel();
-        chartPanel.setLayout(new FlowLayout());
+        chartPanel.setLayout(new BoxLayout(chartPanel, BoxLayout.Y_AXIS));
         return chartPanel;
     }
 
-    public void setReportImage(BufferedImage image) {
+    public void setMainChart(BufferedImage image) {
+        JPanel main = Registry.get("reportDetailPanel");
+        if (null != chartScroll) {
+            main.remove(chartScroll);
+        }
+        wrapper = new JPanel();
+        wrapper.setLayout(new FlowLayout());
+        wrapper.add(createChart());
+        chartScroll = new JScrollPane(wrapper);
+        main.add(chartScroll, BorderLayout.CENTER);
         JLabel picLabel = new JLabel(new ImageIcon(image));
-        chartPanel.removeAll();
         chartPanel.add(picLabel);
-        chartPanel.repaint();
-        chartPanel.doLayout();
-        chartScroll.doLayout();
+    }
+
+    public void setReportImages(Map<Category, BufferedImage> imagesMap) {
+        for (BufferedImage image : imagesMap.values()) {
+            JLabel picLabel = new JLabel(new ImageIcon(image));
+            chartPanel.add(picLabel);
+        }
+        JPanel main = Registry.get("reportDetailPanel");
+        main.doLayout();
     }
 }

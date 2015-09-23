@@ -74,6 +74,9 @@ public class MainView extends View {
         tabs.add("Отчет основной", panel);
         Registry.register("reportMainPanel", panel);
         panel = new JPanel();
+        tabs.add("Отчет по категориям", panel);
+        Registry.register("reportCategoryPanel", panel);
+        panel = new JPanel();
         tabs.add("Отчет детальный", panel);
         Registry.register("reportDetailPanel", panel);
         panel = new JPanel();
@@ -83,16 +86,19 @@ public class MainView extends View {
             @Override
             public void stateChanged(ChangeEvent e) {
                 switch (tabs.getSelectedIndex()) {
-                case 0: 
+                case 0:
                     Dispatcher.forwardEvent(AppEvents.OpenRecordsTab);
                     break;
-                case 1: 
+                case 1:
                     Dispatcher.forwardEvent(AppEvents.OpenMainReportTab);
                     break;
-                case 2: 
+                case 2:
+                    Dispatcher.forwardEvent(AppEvents.OpenCategoryReportTab);
+                    break;
+                case 3:
                     Dispatcher.forwardEvent(AppEvents.OpenDetailsReportTab);
                     break;
-                case 3: 
+                case 4:
                     Dispatcher.forwardEvent(AppEvents.OpenSettingsTab);
                     break;
                 default:

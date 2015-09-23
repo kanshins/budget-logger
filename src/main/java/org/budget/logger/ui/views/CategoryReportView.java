@@ -9,7 +9,9 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.util.Map;
 
+import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import org.budget.logger.data.model.Category;
 import org.budget.logger.ui.AppEvents;
 import org.budget.logger.ui.mvc.AppEvent;
 import org.budget.logger.ui.mvc.Controller;
@@ -26,15 +29,16 @@ import org.budget.logger.ui.mvc.View;
 
 /**
  * @author <sergey.kanshin@gmail.com>
- * @date 22 сент. 2015 г.
+ * @date 23 сент. 2015 г.
  */
-public class MainReportView extends View {
+public class CategoryReportView extends View {
 
     private JComboBox<Integer> periodCombo;
     private JPanel chartPanel;
     private JScrollPane chartScroll;
-
-    public MainReportView(Controller controller) {
+    private JPanel wrapper;
+    
+    public CategoryReportView(Controller controller) {
         super(controller);
     }
 
@@ -43,20 +47,17 @@ public class MainReportView extends View {
         if (AppEvents.Init.equals(event.getType())) {
             onInit();
             return;
-        }
+        }        
     }
 
     private void onInit() {
-        JPanel main = Registry.get("reportMainPanel");
+        JPanel main = Registry.get("reportCategoryPanel");
         main.setLayout(new BorderLayout());
 
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new GridLayout(1, 1));
         topPanel.add(createPeriodPanel());
         main.add(topPanel, BorderLayout.NORTH);
-
-        chartScroll = new JScrollPane(createChart());
-        main.add(chartScroll, BorderLayout.CENTER);
     }
 
     private JPanel createPeriodPanel() {
@@ -79,23 +80,37 @@ public class MainReportView extends View {
         });
         return periodPanel;
     }
-
+    
     public Integer getPeriod() {
         return (Integer) periodCombo.getSelectedItem();
     }
 
     private JPanel createChart() {
         chartPanel = new JPanel();
-        chartPanel.setLayout(new FlowLayout());
+        chartPanel.setLayout(new BoxLayout(chartPanel, BoxLayout.Y_AXIS));
         return chartPanel;
     }
-
-    public void setReportImage(BufferedImage image) {
+    
+    public void setReportOutcomeImage(BufferedImage image) {
+        JPanel main = Registry.get("reportCategoryPanel");
+        if (null != chartScroll) {
+            main.remove(chartScroll);
+        }
+        wrapper = new JPanel();
+        wrapper.setLayout(new FlowLayout());
+        wrapper.add(createChart());
+        chartScroll = new JScrollPane(wrapper);
+        main.add(chartScroll, BorderLayout.CENTER);
         JLabel picLabel = new JLabel(new ImageIcon(image));
-        chartPanel.removeAll();
         chartPanel.add(picLabel);
-        chartPanel.repaint();
-        chartPanel.doLayout();
-        chartScroll.doLayout();
+    }
+    
+    public void setReportImages(Map<Category, BufferedImage> imagesMap) {
+        for (BufferedImage image : imagesMap.values()) {
+            JLabel picLabel = new JLabel(new ImageIcon(image));
+            chartPanel.add(picLabel);
+        }
+        JPanel main = Registry.get("reportCategoryPanel");
+        main.doLayout();
     }
 }
