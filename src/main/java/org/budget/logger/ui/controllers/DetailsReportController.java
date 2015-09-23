@@ -139,7 +139,7 @@ public class DetailsReportController extends Controller {
 
             try {
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
-                ChartUtilities.writeChartAsJPEG(out, jfreechart, 500, getSizeY(categories.size()));
+                ChartUtilities.writeChartAsJPEG(out, jfreechart, 500, getSizeY(map.size()));
                 ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());
                 BufferedImage image = ImageIO.read(in);
                 out.close();

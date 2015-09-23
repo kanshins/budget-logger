@@ -5,18 +5,18 @@ create table categories (id bigint not null generated always as identity (start 
 insert into categories (name, def, report) values ('Продукты', 1, 1);
 
 
-insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
-insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
-insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
-insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
-insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
-insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
-insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
-insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
-insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
-insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
-insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
-insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
-insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
-insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
-insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,1);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,2);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,2);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,2);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,2);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,2);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,2);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,2);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,2);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,2);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,2);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,2);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,2);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,2);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,2);
+insert into records (category,create_date,description,amount,type) values ('Продукты','2015-09-15','чай',100,2);
